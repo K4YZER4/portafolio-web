@@ -1,0 +1,13 @@
+HORACIO / EDITOR OSCURO
+
+Abre index.html; no requiere instalación, internet ni dependencias.
+Todos los 8 archivos del árbol abren contenido. Carpetas desplegables. Pestañas cerrables.
+Ctrl/Cmd+K abre búsqueda por nombre y contenido. Enter abre el primer resultado.
+Vista previa / Código. GitHub externo y copia de enlace con alternativa local.
+Onda SVG tenue activable; preferencia guardada si el navegador permite almacenamiento.
+Entrada con carpeta, cursor automático, clic manual, salto e intro repetible.
+Menú para móvil. Preferencia reducir movimiento respetada.
+La actividad incluida procede del SVG adjunto (instantánea, no actualización en vivo).
+Contenido del perfil basado en la vista previa del README proporcionada.
+Proyectos en desarrollo: sin repositorios ni demos inventados.
+No es un editor que guarda en disco, ni modifica tu repositorio.
