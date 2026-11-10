@@ -2,6 +2,7 @@ import { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../styles.css';
 import './glass.css';
+import fondoUrl from '../fondo.mp4';
 
 const wavePaths = [
   'M-100 150 C200 10 350 300 650 155 S1050 60 1500 180',
@@ -64,7 +65,7 @@ function Workspace() {
         <span className="title">Horacio — personal workspace</span>
         <div className="quicksearch"><input id="searchInput" placeholder="Buscar archivos…  Ctrl K" aria-label="Buscar archivos" readOnly /></div>
         <button className="smallbtn" id="waveToggle" aria-pressed="true">Onda: ON</button>
-        <button className="smallbtn replaybtn" id="replay">Repetir intro</button>
+        <button className="smallbtn replaybtn" id="replay" hidden aria-hidden="true" />
       </header>
       <div className="main">
         <nav className="rail" aria-label="Accesos del editor"><button className="active" id="filesButton" aria-label="Mostrar explorador" /><button id="searchButton" aria-label="Buscar archivos" /><button id="stackButton" aria-label="Abrir stack" /><a className="bottom" id="githubLink" href="https://github.com/K4YZER4" target="_blank" rel="noopener noreferrer" aria-label="Abrir GitHub" /></nav>
@@ -78,10 +79,11 @@ function Workspace() {
 
 function App() {
   useEffect(() => {
+    window.history.replaceState(null, '', '#readme');
     import('../app.js').then(() => import('./hover-navigation.js'));
   }, []);
 
-  return <><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Buscar archivos"><div className="dialoghead"><input id="paletteQuery" placeholder="Buscar archivo o contenido…" aria-label="Buscar archivo o contenido" /><button id="closePalette" aria-label="Cerrar búsqueda">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;
+  return <><video className="background-video" src={fondoUrl} autoPlay loop muted playsInline aria-hidden="true" /><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Buscar archivos"><div className="dialoghead"><input id="paletteQuery" placeholder="Buscar archivo o contenido…" aria-label="Buscar archivo o contenido" /><button id="closePalette" aria-label="Cerrar búsqueda">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;
 }
 
 createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);
