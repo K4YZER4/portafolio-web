@@ -1,6 +1,7 @@
 import { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../styles.css';
+import './glass.css';
 
 const wavePaths = [
   'M-100 150 C200 10 350 300 650 155 S1050 60 1500 180',
@@ -77,7 +78,7 @@ function Workspace() {
 
 function App() {
   useEffect(() => {
-    import('../app.js');
+    import('../app.js').then(() => import('./hover-navigation.js'));
   }, []);
 
   return <><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Buscar archivos"><div className="dialoghead"><input id="paletteQuery" placeholder="Buscar archivo o contenido…" aria-label="Buscar archivo o contenido" /><button id="closePalette" aria-label="Cerrar búsqueda">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;

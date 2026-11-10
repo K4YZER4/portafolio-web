@@ -1,0 +1,115 @@
+/* Glassmorphism layer: softer surfaces and larger interaction targets */
+body{background:radial-gradient(circle at 18% 8%,#94afd00b,transparent 30%),radial-gradient(circle at 82% 78%,#7894c00a,transparent 32%),#050608}
+*{scrollbar-width:thin;scrollbar-color:#c9dcf42e transparent}
+*::-webkit-scrollbar{width:9px;height:9px}
+*::-webkit-scrollbar-track{background:linear-gradient(180deg,#cad8ef01,#cad8ef06,#cad8ef01);border:1px solid #d3def106;border-radius:999px;box-shadow:inset 0 0 8px #0003}
+*::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#dce9fa18,#8298ba20 48%,#cbdcf018);border:2px solid #dceafd30;border-radius:999px;background-clip:padding-box;box-shadow:inset 1px 1px 3px #fff4,inset -1px -1px 4px #17243a55,0 0 8px #a5c4ed12}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(135deg,#f0f6ff38,#9eb5d540 48%,#e1edfc35);border-color:#eff7ff60;box-shadow:inset 1px 1px 4px #fff6,inset -1px -1px 4px #17243a88,0 0 12px #a5c4ed35}
+*::-webkit-scrollbar-corner{background:#080b10}
+.editorbody,.explorer,.tabs,.results{scrollbar-color:#c9dcf42e transparent}
+.editorbody::-webkit-scrollbar-track,.explorer::-webkit-scrollbar-track,.tabs::-webkit-scrollbar-track,.results::-webkit-scrollbar-track{background:transparent;border-left:0}
+.titlebar{background:linear-gradient(180deg,#18202bd9,#0e1014b8);border-bottom-color:#d3def108;box-shadow:0 10px 30px #0003;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.rail{background:linear-gradient(180deg,#121722a8,#0b0d11b8);border-right-color:#d3def10b;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.rail button,.rail a{width:42px;height:42px;border-radius:10px;border-left:2px solid transparent;transition:color .2s,background .2s,transform .2s}
+.rail button:hover,.rail a:hover{background:#cad8ef0d;color:#dce8fa;transform:translateY(-1px)}
+.rail .active{background:#cad8ef0b;border-left-color:#c5d3e7;box-shadow:inset 0 0 18px #cad8ef08}
+.explorer{background:linear-gradient(135deg,#10151ec7,#090b0fa8);border-right-color:#d3def108;box-shadow:12px 0 35px #0002;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.explorertitle{color:#aab9cf;padding-left:21px}
+.tree{padding:0 12px 20px}
+.root{padding-left:10px;color:#becce0}
+.file,.tree summary{min-height:38px;padding:9px 12px;border-color:transparent;border-radius:8px;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.tree details .file{padding-left:34px}
+.file:hover,.tree summary:hover{background:#cad8ef0b;border-color:#cad8ef10;transform:translateX(2px)}
+.file.active{background:linear-gradient(100deg,#cad8ef14,#cad8ef06);border-color:#cad8ef1d;box-shadow:0 5px 18px #0002}
+.sideprofile{border-top-color:#d3def10b}
+.tabs{background:linear-gradient(180deg,#10141cb8,#090b0fa8);border-bottom-color:#d3def108;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.tab{background:#10141b80;border-right-color:#d3def108;transition:background .2s}
+.tab:hover{background:#cad8ef08}
+.tab .select{min-height:43px;padding:12px 12px 12px 16px}
+.tab .close{min-width:34px;min-height:34px;border-radius:7px}
+.tab .close:hover{background:#cad8ef0e;color:#dbe7f8}
+.crumbbar{border-bottom-color:#ffffff03;background:#080b10a8;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.modes button{min-height:30px;padding:6px 9px}
+.paper{animation:enter .3s ease}
+.btn,.smallbtn{transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.btn:hover{box-shadow:0 8px 22px #0003}
+.smallbtn:hover{background:#cad8ef0d;border-color:#cad8ef30;box-shadow:0 5px 18px #0002}
+.project,.links a,.section,.social,.metric{background:linear-gradient(135deg,#cad8ef0a,#cad8ef02);box-shadow:0 8px 25px #0002;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.project:hover,.links a:hover{box-shadow:0 12px 30px #0003}
+.dialog{background:linear-gradient(145deg,#182231eb,#0c111be8);box-shadow:0 24px 100px #000c;backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px)}
+.dialoghead{background:#cad8ef08}
+@media(max-width:760px){.rail button,.rail a{width:38px;height:40px}.file,.tree summary{min-height:42px}.explorer{box-shadow:18px 0 40px #000b}.tab .select{min-height:43px}}
+
+/* Dark silver glass finish */
+.explorer{background:linear-gradient(125deg,#c8d0da0d 0%,#7d87940b 35%,#e6ebf20a 62%,#343b460d 100%),#090b0ee8;border-color:#dfe5ed16;box-shadow:inset -1px 0 #eef3f70b,12px 0 40px #0005}
+.explorertitle{color:#c2c9d2;text-shadow:0 1px 12px #e5ebf52a}
+.root{color:#c6ccd4;text-shadow:0 0 12px #dfe6ef18}
+.file,.tree summary{color:#aeb6c1}
+.file:hover,.tree summary:hover{background:linear-gradient(100deg,#dce3eb14,#aeb9c70a);border-color:#e9eef513;box-shadow:inset 0 1px #f4f7fb0d,0 5px 18px #0003}
+.file.active{background:linear-gradient(105deg,#dbe3ec1b,#8e9aa916 52%,#f1f4f70b);border-color:#e9eef525;box-shadow:inset 0 1px #fff2,0 8px 22px #0004}
+.file.active .filemark,.file:hover .filemark{color:#e0e6ed}
+.tree summary .ico{color:#bfc7d0}
+.sideprofile{color:#7d8793;border-top-color:#e5ebf20f}
+.sideprofile b{color:#c1c9d3}
+.rail{background:linear-gradient(155deg,#dce4ed0b,#7c87940b 48%,#eef3f707),#0b0e12d9;border-right-color:#e7edf411;box-shadow:inset -1px 0 #fff1}
+.rail .active{background:linear-gradient(135deg,#e4eaf214,#919ba80b);border-left-color:#d8dee6;box-shadow:inset 0 0 18px #edf2f70d,0 4px 18px #0003}
+.tabs{background:linear-gradient(180deg,#dce4ed0b,#68748208),#090b0edb;border-bottom-color:#e1e8ef12}
+.tab{background:#cbd4df05;border-right-color:#e1e8ef0d}
+.tab.active{border-top-color:#d8e0e8;background:#080a0dcf}
+.tab.active .select{color:#e0e5eb}
+.crumbbar{background:linear-gradient(180deg,#dce4ed05,#090b0dc9);border-bottom-color:#e1e8ef0b}
+.modes button.active{background:#dce4ed09;color:#dbe2e9;border-color:#dce4ed20}
+
+/* Monochrome glass palette: black, white and silver only */
+:root{--text:#f1f1f1;--muted:#909090;--line:#ffffff12;--silver:#d4d4d4}
+body{background:radial-gradient(circle at 18% 8%,#fff10,transparent 30%),radial-gradient(circle at 82% 78%,#fff08,transparent 32%),#030303;color:#ededed}
+.titlebar{background:linear-gradient(180deg,#ffffff0d,#000000c9);border-bottom-color:#ffffff16;box-shadow:0 10px 30px #0008}
+.title,.quicksearch input,.smallbtn{color:#bdbdbd}
+.quicksearch input{background:#00000080;border-color:#ffffff1c}
+.smallbtn{background:#ffffff06;border-color:#ffffff1c}
+.rail{background:linear-gradient(155deg,#fff0a,#77777708 48%,#fff005),#050505e8;border-right-color:#ffffff14}
+.rail button,.rail a{color:#8e8e8e}
+.rail button:hover,.rail a:hover{background:#ffffff0d;color:#f4f4f4}
+.rail .active{background:linear-gradient(135deg,#fff14,#8888880b);border-left-color:#e5e5e5;box-shadow:inset 0 0 18px #fff0d,0 4px 18px #0006}
+.explorer{background:linear-gradient(125deg,#fff10 0%,#9999990b 35%,#fff10 62%,#3333330d 100%),#070707ed;border-color:#ffffff18;box-shadow:inset -1px 0 #fff0d,12px 0 40px #0008}
+.explorertitle,.root{color:#d2d2d2;text-shadow:0 1px 12px #fff2}
+.file,.tree summary{color:#adadad}
+.file:hover,.tree summary:hover{background:linear-gradient(100deg,#fff14,#aaa0b);border-color:#fff18;box-shadow:inset 0 1px #fff12,0 5px 18px #0006}
+.file.active{background:linear-gradient(105deg,#fff1d,#99999916 52%,#fff0a);border-color:#fff22;box-shadow:inset 0 1px #fff3,0 8px 22px #0008;color:#f2f2f2}
+.file.active .filemark,.file:hover .filemark,.tree summary .ico{color:#ededed}
+.sideprofile{color:#777;border-top-color:#fff12}.sideprofile b{color:#c8c8c8}
+.tabs{background:linear-gradient(180deg,#fff0b,#66666608),#050505ed;border-bottom-color:#fff14}
+.tab{background:#fff005;border-right-color:#fff10}.tab:hover{background:#fff0c}.tab.active{border-top-color:#e5e5e5;background:#030303e8}.tab.active .select{color:#ededed}
+.crumbbar{background:linear-gradient(180deg,#fff006,#000000db);border-bottom-color:#fff10}.crumb .filename{color:#ddd}
+.modes button{color:#858585}.modes button.active{background:#fff0d;color:#eee;border-color:#fff22}
+.editor{background:#030303}.wave path{stroke:#fff}.paper h1{color:#f3f3f3}.paper h1 em{color:#bcbcbc}.eyebrow{color:#aaa}.lead,.paper p{color:#bcbcbc!important}.paper h2,.paper h3{color:#ddd}.paper h2 .hash{color:#888}
+.chip,.tag{color:#c4c4c4;border-color:#fff20;background:#fff005}.btn{background:#ededed;border-color:#fff55;color:#080808}.btn:hover{background:#fff}.btn.secondary{background:#fff08;border-color:#fff25;color:#ddd}
+.quote{border-left-color:#aaa;background:#fff006;color:#c4c4c4}.project,.links a,.section,.social,.metric{background:linear-gradient(135deg,#fff0d,#fff002);border-color:#fff18}.project .ico,.social>.ico{color:#d5d5d5}.links a{color:#c6c6c6}
+.codebox{background:#000;border-color:#fff14}.codetext{color:#c5c5c5}.key{color:#eee}.ln{color:#666}
+.dialog{background:linear-gradient(145deg,#222222ed,#050505f0);border-color:#fff35}.dialoghead{background:#fff0d}.result{color:#d0d0d0}.result:hover{background:#fff0d;color:#fff}.result small{color:#888}
+.status{background:#0b0b0b;border-top-color:#fff18;color:#aaa}.toast{background:#1d1d1d;border-color:#fff35;color:#eee}
+.activitysvg{background:#000}
+
+/* Final neutral correction: valid transparent whites, never yellow or blue */
+body{background:radial-gradient(circle at 18% 8%,rgba(255,255,255,.035),transparent 30%),radial-gradient(circle at 82% 78%,rgba(255,255,255,.025),transparent 32%),#030303}
+.rail{background:linear-gradient(155deg,rgba(255,255,255,.045),rgba(120,120,120,.035) 48%,rgba(255,255,255,.02)),rgba(5,5,5,.93)}
+.rail .active{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(130,130,130,.04));box-shadow:inset 0 0 18px rgba(255,255,255,.05),0 4px 18px rgba(0,0,0,.6)}
+.explorer{background:linear-gradient(125deg,rgba(255,255,255,.045),rgba(130,130,130,.03) 35%,rgba(255,255,255,.035) 62%,rgba(50,50,50,.04) 100%),rgba(7,7,7,.94)}
+.file:hover,.tree summary:hover{background:linear-gradient(100deg,rgba(255,255,255,.09),rgba(170,170,170,.045));border-color:rgba(255,255,255,.1)}
+.file.active{background:linear-gradient(105deg,rgba(255,255,255,.12),rgba(145,145,145,.08) 52%,rgba(255,255,255,.045));border-color:rgba(255,255,255,.15)}
+.tabs{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(100,100,100,.025)),rgba(5,5,5,.94)}
+.tab{background:rgba(255,255,255,.025);border-right-color:rgba(255,255,255,.08)}
+.tab:hover{background:rgba(255,255,255,.06)}
+.crumbbar{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.86));border-bottom-color:rgba(255,255,255,.08)}
+.modes button.active{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.chip,.tag{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.14)}
+.quote{background:rgba(255,255,255,.035)}
+.project,.links a,.section,.social,.metric{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border-color:rgba(255,255,255,.1)}
+.dialoghead{background:rgba(255,255,255,.06)}
+.dialog .result:hover{background:rgba(255,255,255,.08)}
+.status{background:rgba(12,12,12,.95);border-top-color:rgba(255,255,255,.1)}
+.btn{background:#ededed;border-color:rgba(255,255,255,.45);color:#080808}.btn:hover{background:#fff}.btn.secondary{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:#ddd}
+.explorer{background:linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008)),#030303;border-right:0!important;box-shadow:none!important}
+.explorer{scrollbar-width:none}
+.explorer::-webkit-scrollbar{width:0;height:0}
+.explorer::-webkit-scrollbar-track,.explorer::-webkit-scrollbar-thumb{background:transparent;border:0;box-shadow:none}
