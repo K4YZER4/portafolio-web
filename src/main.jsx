@@ -80,7 +80,7 @@ function Workspace() {
 function App() {
   useEffect(() => {
     window.history.replaceState(null, '', '#readme');
-    import('../app.js').then(() => Promise.all([import('./hover-navigation.js'), import('./stack-view.js')]));
+    import('../app.js').then(() => Promise.all([import('./hover-navigation.js'), import('./stack-view.js'), import('./radar-view.js')]));
   }, []);
 
   return <><video className="background-video" src={fondoUrl} autoPlay loop muted playsInline aria-hidden="true" /><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Buscar archivos"><div className="dialoghead"><input id="paletteQuery" placeholder="Buscar archivo o contenido…" aria-label="Buscar archivo o contenido" /><button id="closePalette" aria-label="Cerrar búsqueda">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;
