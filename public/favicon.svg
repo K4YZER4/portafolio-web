@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#141923"/>
+      <stop offset="100%" stop-color="#07090d"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)" stroke="#cad8ef" stroke-opacity="0.28" stroke-width="2"/>
+  <text x="27" y="40" text-anchor="middle" fill="#ecf2fb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="25" font-weight="600" letter-spacing="-1">HA</text>
+  <rect x="44" y="38" width="9" height="3.2" rx="1.2" fill="#9eb3d1"/>
+</svg>

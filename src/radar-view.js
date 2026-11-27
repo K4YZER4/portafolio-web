@@ -1,4 +1,29 @@
-const MONTHS = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+const LIVE_SVG_URL = 'https://raw.githubusercontent.com/K4YZER4/K4YZER4/main/assets/code-city.svg';
+let liveActivityPromise = null;
+
+function parseSvgActivity(svgText) {
+  const byDate = new Map();
+  for (const match of svgText.matchAll(/<title>(\d{4}-\d{2}-\d{2}):\s*(\d+)/g)) {
+    byDate.set(match[1], Number(match[2]));
+  }
+  return [...byDate.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, count]) => ({ date, count }));
+}
+
+function fetchLiveActivity() {
+  if (!liveActivityPromise) {
+    liveActivityPromise = fetch(LIVE_SVG_URL, { cache: 'no-store' })
+      .then((res) => (res.ok ? res.text() : ''))
+      .then((svgText) => {
+        const parsed = parseSvgActivity(svgText);
+        return parsed.length ? parsed : null;
+      })
+      .catch(() => null);
+  }
+  return liveActivityPromise;
+}
 
 function getActivityData() {
   return [...document.querySelectorAll('.activitysvg title')].map((title) => {
@@ -7,17 +32,27 @@ function getActivityData() {
   }).filter(Boolean);
 }
 
+function updateSummaryMetrics(documentView, data) {
+  const total = data.reduce((sum, item) => sum + item.count, 0);
+  const active = data.filter((item) => item.count > 0).length;
+  const cards = documentView?.querySelectorAll('.metrics .metric strong');
+  if (cards && cards.length >= 2) {
+    cards[0].textContent = String(total);
+    cards[1].textContent = String(active);
+  }
+  return { total, active };
+}
+
 function renderRadar() {
   if (location.hash.slice(1) !== 'activity') return;
   const documentView = document.getElementById('document');
   const oldSection = documentView?.querySelector('.section:has(.activitysvg)');
   if (!oldSection || oldSection.dataset.radarReady === 'true') return;
 
-  const data = getActivityData();
+  let data = getActivityData();
   if (!data.length) return;
-  const total = data.reduce((sum, item) => sum + item.count, 0);
-  const active = data.filter((item) => item.count > 0).length;
-  oldSection.outerHTML = `<div class="radar-card"><div class="canvas-wrap" id="radarWrap"><div class="hud-telemetry"><div>ORBITAL ARRAY: <strong>52 SEMANAS / 7 DÍAS</strong></div><div>SISTEMA: <strong>GITHUB CONTRIBUTION SONAR</strong></div></div><div class="hud-scanner-info"><div>FECHA EN BARRIDO: <strong id="scanDate">---</strong></div><div>COORDENADA ANGULAR: <strong id="scanAngle">0°</strong></div></div><canvas id="radarCanvas"></canvas><div class="radar-tooltip" id="radarTip"></div></div><div class="card-bottom"><div class="stat-group"><span>Rango: <strong>${data[0].date} — ${data.at(-1).date}</strong></span><span>Contribuciones: <strong>${total}</strong></span><span>Días activos: <strong>${active} / ${data.length}</strong></span></div><div class="legend"><span>0</span><span class="legend-dot" style="background:#202020"></span><span class="legend-dot" style="background:#777"></span><span class="legend-dot" style="background:#bbb"></span><span class="legend-dot" style="background:#fff;box-shadow:0 0 6px #fff8"></span><span>10+ commits</span></div></div></div>`;
+  const { total, active } = updateSummaryMetrics(documentView, data);
+  oldSection.outerHTML = `<div class="radar-card"><div class="canvas-wrap" id="radarWrap"><div class="hud-telemetry"><div>ORBITAL ARRAY: <strong>52 WEEKS / 7 DAYS</strong></div><div>SYSTEM: <strong>GITHUB CONTRIBUTION SONAR</strong></div></div><div class="hud-scanner-info"><div>SCAN DATE: <strong id="scanDate">---</strong></div><div>ANGULAR COORD: <strong id="scanAngle">0°</strong></div></div><canvas id="radarCanvas"></canvas><div class="radar-tooltip" id="radarTip"></div></div><div class="card-bottom"><div class="stat-group"><span>Range: <strong id="radarRange">${data[0].date} — ${data.at(-1).date}</strong></span><span>Contributions: <strong id="radarTotal">${total}</strong></span><span>Active days: <strong id="radarActive">${active} / ${data.length}</strong></span></div><div class="legend"><span>0</span><span class="legend-dot" style="background:#202020"></span><span class="legend-dot" style="background:#777"></span><span class="legend-dot" style="background:#bbb"></span><span class="legend-dot" style="background:#fff;box-shadow:0 0 6px #fff8"></span><span>10+ commits</span></div></div></div>`;
 
   const wrap = document.getElementById('radarWrap');
   const canvas = document.getElementById('radarCanvas');
@@ -26,6 +61,7 @@ function renderRadar() {
   let width = 0, height = 0, dpr = 1, sweep = -Math.PI / 2, nodes = [], mouse = { x: -1000, y: -1000 };
 
   function resize() {
+    if (!wrap.isConnected) return;
     dpr = window.devicePixelRatio || 1;
     width = wrap.clientWidth;
     height = wrap.clientHeight;
@@ -46,6 +82,7 @@ function renderRadar() {
   }
 
   function draw() {
+    if (!canvas.isConnected) return;
     const centerX = width / 2, centerY = height / 2;
     const maxRadius = Math.min(width, height) * .38;
     const minRadius = maxRadius * .28;
@@ -69,7 +106,7 @@ function renderRadar() {
     ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(centerX + Math.cos(sweep) * (maxRadius + 28), centerY + Math.sin(sweep) * (maxRadius + 28)); ctx.strokeStyle = 'rgba(255,255,255,.65)'; ctx.stroke();
     nodes.forEach((node) => { const angle = (node.angle - normalizedSweep + Math.PI * 2) % (Math.PI * 2); const nearBeam = angle < .08 || angle > Math.PI * 2 - .08; const radius = node.count ? 2 + Math.sqrt(node.count / 32) * 5 : 1.4; ctx.beginPath(); ctx.arc(node.x, node.y, radius + (nearBeam ? 2 : 0), 0, Math.PI * 2); ctx.fillStyle = node.count ? (nearBeam ? '#fff' : '#bdbdbd') : 'rgba(255,255,255,.13)'; ctx.shadowBlur = nearBeam && node.count ? 12 : 0; ctx.shadowColor = '#fff'; ctx.fill(); ctx.shadowBlur = 0; });
     const hit = nodes.find((node) => Math.hypot(node.x - mouse.x, node.y - mouse.y) < 13);
-    if (hit) { tip.innerHTML = `<strong>${hit.count} contribuciones</strong><div>${hit.date}</div>`; tip.style.left = `${hit.x}px`; tip.style.top = `${hit.y}px`; tip.classList.add('visible'); } else tip.classList.remove('visible');
+    if (hit) { tip.innerHTML = `<strong>${hit.count} contributions</strong><div>${hit.date}</div>`; tip.style.left = `${hit.x}px`; tip.style.top = `${hit.y}px`; tip.classList.add('visible'); } else tip.classList.remove('visible');
     const scanDate = nodes.reduce((closest, node) => Math.abs(((node.angle - normalizedSweep + Math.PI * 3) % (Math.PI * 2)) - Math.PI) < Math.abs(((closest.angle - normalizedSweep + Math.PI * 3) % (Math.PI * 2)) - Math.PI) ? node : closest, nodes[0]);
     document.getElementById('scanDate').textContent = scanDate.date; document.getElementById('scanAngle').textContent = `${Math.round(normalizedSweep * 180 / Math.PI)}°`;
     requestAnimationFrame(draw);
@@ -77,6 +114,19 @@ function renderRadar() {
   canvas.addEventListener('mousemove', (event) => { const rect = canvas.getBoundingClientRect(); mouse = { x: event.clientX - rect.left, y: event.clientY - rect.top }; });
   canvas.addEventListener('mouseleave', () => { mouse = { x: -1000, y: -1000 }; });
   new ResizeObserver(resize).observe(wrap); resize(); draw();
+
+  fetchLiveActivity().then((liveData) => {
+    if (!liveData || !wrap.isConnected) return;
+    data = liveData;
+    const stats = updateSummaryMetrics(documentView, data);
+    const rangeEl = document.getElementById('radarRange');
+    const totalEl = document.getElementById('radarTotal');
+    const activeEl = document.getElementById('radarActive');
+    if (rangeEl) rangeEl.textContent = `${data[0].date} — ${data.at(-1).date}`;
+    if (totalEl) totalEl.textContent = String(stats.total);
+    if (activeEl) activeEl.textContent = `${stats.active} / ${data.length}`;
+    resize();
+  });
 }
 
 const radarObserver = new MutationObserver(renderRadar);
