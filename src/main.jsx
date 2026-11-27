@@ -35,10 +35,10 @@ function Waves() {
 
 function Intro() {
   return (
-    <section id="intro" aria-label="Entrada al explorador de archivos">
-      <button className="skip" id="skip">Saltar intro →</button>
+    <section id="intro" aria-label="Workspace explorer intro">
+      <button className="skip" id="skip">Skip intro →</button>
       <div className="stage" id="stage">
-        <button className="entry" id="entry" aria-label="Abrir el explorador de archivos">
+        <button className="entry" id="entry" aria-label="Open file explorer">
           <svg viewBox="0 0 120 94" fill="none" aria-hidden="true">
             <defs>
               <linearGradient id="back" x1="10" y1="10" x2="95" y2="80" gradientUnits="userSpaceOnUse"><stop stopColor="#aab3c1" /><stop offset="1" stopColor="#4b5463" /></linearGradient>
@@ -52,7 +52,7 @@ function Intro() {
         </button>
         <svg className="cursor" viewBox="0 0 30 38" aria-hidden="true"><path d="M3 2v29l7-7 6 12 5-3-6-11 11-1z" fill="#f1f4fa" stroke="#151922" strokeWidth="1.6" strokeLinejoin="round" /></svg>
       </div>
-      <div className="entryhint">ABRIR EXPLORADOR</div>
+      <div className="entryhint">OPEN EXPLORER</div>
     </section>
   );
 }
@@ -63,16 +63,16 @@ function Workspace() {
       <header className="titlebar">
         <div className="dots" aria-hidden="true"><i /><i /><i /></div>
         <span className="title">Horacio — personal workspace</span>
-        <div className="quicksearch"><input id="searchInput" placeholder="Buscar archivos…  Ctrl K" aria-label="Buscar archivos" readOnly /></div>
-        <button className="smallbtn" id="waveToggle" aria-pressed="true">Onda: ON</button>
+        <div className="quicksearch"><input id="searchInput" placeholder="Search files…  Ctrl K" aria-label="Search files" readOnly /></div>
+        <button className="smallbtn" id="waveToggle" aria-pressed="true">Wave: ON</button>
         <button className="smallbtn replaybtn" id="replay" hidden aria-hidden="true" />
       </header>
       <div className="main">
-        <nav className="rail" aria-label="Accesos del editor"><button className="active" id="filesButton" aria-label="Mostrar explorador" /><button id="searchButton" aria-label="Buscar archivos" /><button id="stackButton" aria-label="Abrir stack" /><a className="bottom" id="githubLink" href="https://github.com/K4YZER4" target="_blank" rel="noopener noreferrer" aria-label="Abrir GitHub" /></nav>
-        <aside className="explorer" aria-label="Explorador"><div className="explorertitle">EXPLORADOR</div><nav className="tree" id="tree" aria-label="Archivos del portfolio" /><div className="sideprofile"><b>Horacio Alvarez Escobedo</b><br />Backend · APIs · Real-Time Systems<br />@K4YZER4</div></aside>
-        <main className="editor"><Waves /><nav className="tabs" id="tabs" aria-label="Pestañas abiertas" /><div className="crumbbar"><button className="mobilemenu" id="mobilemenu" aria-label="Mostrar árbol de archivos">☰</button><nav className="crumb" id="crumb" aria-label="Ruta del archivo" /><div className="modes"><button id="preview" className="active">Vista previa</button><button id="source">Código</button></div></div><div className="editorbody" id="document" aria-label="Documento actual" /></main>
+        <nav className="rail" aria-label="Editor shortcuts"><button className="active" id="filesButton" aria-label="Toggle explorer" /><button id="searchButton" aria-label="Search files" /><button id="stackButton" aria-label="Open stack" /><a className="bottom" id="githubLink" href="https://github.com/K4YZER4" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub" /></nav>
+        <aside className="explorer" aria-label="Explorer"><div className="explorertitle">EXPLORER</div><nav className="tree" id="tree" aria-label="Portfolio files" /><div className="sideprofile"><b>Horacio Alvarez Escobedo</b><br />Backend · APIs · Real-Time Systems<br />@K4YZER4</div></aside>
+        <main className="editor"><Waves /><nav className="tabs" id="tabs" aria-label="Open tabs" /><div className="crumbbar"><button className="mobilemenu" id="mobilemenu" aria-label="Show file tree">☰</button><nav className="crumb" id="crumb" aria-label="File path" /><div className="modes"><button id="preview" className="active">Preview</button><button id="source">Code</button></div></div><div className="editorbody" id="document" aria-label="Current document" /></main>
       </div>
-      <footer className="status"><span>⌁ main</span><span>Workspace personal</span><div className="right"><span id="lineCount" /><span>UTF-8</span><span id="language">Markdown</span></div></footer>
+      <footer className="status"><span>⌁ main</span><span>Personal workspace</span><div className="right"><span id="lineCount" /><span>UTF-8</span><span id="language">Markdown</span></div></footer>
     </div>
   );
 }
@@ -83,7 +83,7 @@ function App() {
     import('../app.js').then(() => Promise.all([import('./hover-navigation.js'), import('./stack-view.js'), import('./radar-view.js')]));
   }, []);
 
-  return <><video className="background-video" src={fondoUrl} autoPlay loop muted playsInline aria-hidden="true" /><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Buscar archivos"><div className="dialoghead"><input id="paletteQuery" placeholder="Buscar archivo o contenido…" aria-label="Buscar archivo o contenido" /><button id="closePalette" aria-label="Cerrar búsqueda">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;
+  return <><video className="background-video" src={fondoUrl} autoPlay loop muted playsInline aria-hidden="true" /><Intro /><Workspace /><dialog className="dialog" id="palette" aria-label="Search files"><div className="dialoghead"><input id="paletteQuery" placeholder="Search file or content…" aria-label="Search file or content" /><button id="closePalette" aria-label="Close search">Esc</button></div><div className="results" id="results" /></dialog><div className="toast" id="toast" role="status" hidden /></>;
 }
 
 createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);
